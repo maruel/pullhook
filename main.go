@@ -64,7 +64,7 @@ func roundTime(t time.Duration) time.Duration {
 
 // pullRepo tries to pull a repository if possible. If the pull failed, it
 // deletes the checkout.
-func pullRepo() (string, bool) {
+func pullRepo() {
 	cmd := []string{"git", "pull", "--prune", "--quiet"}
 	cmds := strings.Join(cmd, " ")
 	log.Printf("- %s", cmds)
@@ -84,7 +84,7 @@ func pullRepo() (string, bool) {
 			}
 		}
 	}
-	return fmt.Sprintf("$ %s  (exit:%d in %s)\n%s", cmds, exit, roundTime(duration), normalizeUTF8(out)), err == nil
+	log.Printf("$ %s  (exit:%d in %s)\n%s", cmds, exit, roundTime(duration), normalizeUTF8(out))
 }
 
 // server is both the HTTP server and the task queue server.
