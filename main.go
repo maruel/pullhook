@@ -29,6 +29,7 @@ import (
 )
 
 var start time.Time
+var wd string
 
 // normalizeUTF8 returns valid UTF8 from potentially incorrectly encoded data
 // from an untrusted process.
@@ -159,7 +160,8 @@ func mainImpl() error {
 	if runtime.GOOS != "windows" {
 		log.SetFlags(0)
 	}
-	wd, err := os.Getwd()
+	var err error
+	wd, err = os.Getwd()
 	if err != nil {
 		return err
 	}
